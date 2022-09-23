@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,9 @@ namespace Gra_refleks
         Color kolor;
         int cyfra = 0;
         int y;
+        int suma;
+        DateTime start;
+        DateTime stop;
         public Form1()
         {
             InitializeComponent();
@@ -26,12 +30,10 @@ namespace Gra_refleks
         {
             if (!string.IsNullOrEmpty(textBox1.Text))
             {
-                ksywa = new Ksywa();
                 cyfra = 0;
-                ksywa.suma = 0;
-                label4.Text = ksywa.suma.ToString();
-                ksywa.ksywa = textBox1.Text;
-                ksywa.start = DateTime.Now;
+                suma = 0;
+                label4.Text = suma.ToString();
+                start = DateTime.Now;
                 progressBar1.Value = 0;
                 button1.Enabled = false;
                 Random x = new Random();
@@ -110,23 +112,15 @@ namespace Gra_refleks
         }
         public void Wyświetl()
         {
-            int miejsce = 1;
-            for (int i = 0; i < lista.Count - 1; i++)
-            {
-                if ((lista[i].end - lista[i].start) > (lista[i + 1].end - lista[i + 1].start))
-                {
-                    Ksywa k;
-                    k = lista[i];
-                    lista[i] = lista[i + 1];
-                    lista[i + 1] = k;
-                    i = -1;
-                }
-            }
             listBox1.Items.Clear();
-            foreach (Ksywa ksywa in lista)
+            Sortuj(lista);
+            for (int i = 0; i < lista.Count; i++)
             {
-                listBox1.Items.Add(miejsce + ". " + ksywa.ksywa + "  " + (ksywa.end - ksywa.start).TotalSeconds.ToString("0.00"));
-                miejsce++;
+                lista[i].miejsce = i + 1;
+            }
+            foreach (Ksywa k in lista)
+            {
+                listBox1.Items.Add(k.miejsce + ". " + k.ksywa + "  " + k.czas.TotalSeconds.ToString("0.00"));
             }
         }
 
@@ -208,10 +202,10 @@ namespace Gra_refleks
         {
             if (currentbutton.BackColor == Color.Red)
             {
-                if (ksywa.suma < 20)
+                if (suma < 20)
                 {
-                    ksywa.suma++;
-                    label4.Text = ksywa.suma.ToString();
+                    suma++;
+                    label4.Text = suma.ToString();
                     do
                     {
                         Random x = new Random();
@@ -287,7 +281,11 @@ namespace Gra_refleks
                 }
                 else
                 {
-                    ksywa.end = DateTime.Now;
+                    ksywa = new Ksywa();
+                    stop = DateTime.Now;
+                    ksywa.ksywa = textBox1.Text;
+                    ksywa.miejsce = 1;
+                    ksywa.czas = stop - start;
                     lista.Add(ksywa);
                     Wyświetl();
                     button1.Enabled = true;
@@ -295,6 +293,56 @@ namespace Gra_refleks
                     ksywa = null;
                 }
             }
+        }
+
+        private void button_eksport_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter writer = new StreamWriter(save.FileName);
+                for (int i = 0; i < lista.Count; i++)
+                {
+                    writer.WriteLine(lista[i].miejsce + "," + lista[i].ksywa + "," + lista[i].czas);
+                }
+                writer.Close();
+            }
+        }
+
+        private void button_import_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                listBox1.Items.Clear();
+                lista.Clear();
+
+                using (StreamReader r = new StreamReader(open.OpenFile()))
+                {
+                    string line;
+                    while ((line = r.ReadLine()) != null)
+                    {
+                        ksywa = new Ksywa();
+                        string[] parts = line.Split(',');
+                        ksywa.miejsce = Int32.Parse(parts[0]);
+                        ksywa.ksywa = parts[1];
+                        ksywa.czas = TimeSpan.Parse(parts[2]);
+                        lista.Add(ksywa);
+                        
+                    }
+                    foreach (Ksywa ksywa in lista)
+                    {
+                        listBox1.Items.Add(ksywa.miejsce + ". " + ksywa.ksywa + "  " + ksywa.czas.TotalSeconds.ToString("0.00"));
+                    }
+                }
+            }
+        }
+        public void Sortuj(List<Ksywa> lista)
+        {
+            lista.Sort(delegate (Ksywa x, Ksywa y)
+            {
+                return x.czas.CompareTo(y.czas);
+            });
         }
     }
 }

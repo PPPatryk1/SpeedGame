@@ -7,3 +7,14 @@ C:\Users\Patryk\source\repos\Gra refleks\Gra refleks\obj\Debug\Gra_refleks.Prope
 C:\Users\Patryk\source\repos\Gra refleks\Gra refleks\obj\Debug\Gra refleks.csproj.GenerateResource.cache
 C:\Users\Patryk\source\repos\Gra refleks\Gra refleks\obj\Debug\Gra refleks.exe
 C:\Users\Patryk\source\repos\Gra refleks\Gra refleks\obj\Debug\Gra refleks.pdb
+C:\Users\patryk.polak\Source\Repos\SpeedGame\Gra refleks\bin\Debug\Gra refleks.exe.config
+C:\Users\patryk.polak\Source\Repos\SpeedGame\Gra refleks\bin\Debug\Gra refleks.exe
+C:\Users\patryk.polak\Source\Repos\SpeedGame\Gra refleks\bin\Debug\Gra refleks.pdb
+C:\Users\patryk.polak\Source\Repos\SpeedGame\Gra refleks\obj\Debug\Gra refleks.csproj.AssemblyReference.cache
+C:\Users\patryk.polak\Source\Repos\SpeedGame\Gra refleks\obj\Debug\Gra refleks.csproj.SuggestedBindingRedirects.cache
+C:\Users\patryk.polak\Source\Repos\SpeedGame\Gra refleks\obj\Debug\Gra_refleks.Form1.resources
+C:\Users\patryk.polak\Source\Repos\SpeedGame\Gra refleks\obj\Debug\Gra_refleks.Properties.Resources.resources
+C:\Users\patryk.polak\Source\Repos\SpeedGame\Gra refleks\obj\Debug\Gra refleks.csproj.GenerateResource.cache
+C:\Users\patryk.polak\Source\Repos\SpeedGame\Gra refleks\obj\Debug\Gra refleks.csproj.CoreCompileInputs.cache
+C:\Users\patryk.polak\Source\Repos\SpeedGame\Gra refleks\obj\Debug\Gra refleks.exe
+C:\Users\patryk.polak\Source\Repos\SpeedGame\Gra refleks\obj\Debug\Gra refleks.pdb

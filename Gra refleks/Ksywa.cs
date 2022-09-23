@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Gra_refleks
 {
-    class Ksywa
+    public class Ksywa
     {
+        public int miejsce;
         public string ksywa;
-        public DateTime start;
-        public DateTime end;
-        public int suma;
+        public TimeSpan czas;
     }
 }
